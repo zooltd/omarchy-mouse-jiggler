@@ -6,7 +6,7 @@
   "author": "Youhan Wu",
   "license": "MIT",
   "homepage": "https://github.com/zooltd/omarchy-mouse-jiggler",
-  "description": "Bar toggle that nudges the pointer so idle lock, screensaver, and mouse-watching apps stay awake.",
+  "description": "Omarchy menu bar mouse jiggler. Adds a click-to-toggle mouse icon at the right end of the bar so idle lock, screensaver, and apps stay awake.",
   "kinds": [
     "bar-widget"
   ],
@@ -15,7 +15,7 @@
   },
   "barWidget": {
     "displayName": "Mouse jiggler",
-    "description": "Nudge the pointer so idle timers and apps stay awake",
+    "description": "Mouse icon at the right end of the menu bar. Click to toggle a one-pixel pointer nudge.",
     "category": "Status",
     "allowMultiple": false,
     "defaultSection": "right",
