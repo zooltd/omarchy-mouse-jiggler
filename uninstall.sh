@@ -7,7 +7,6 @@ BIN="$HOME/.local/bin/omarchy-mouse-jiggler"
 UNIT="${XDG_CONFIG_HOME:-$HOME/.config}/systemd/user/omarchy-mouse-jiggler.service"
 STATE="${XDG_STATE_HOME:-$HOME/.local/state}/omarchy/indicators/mouse-jiggler"
 
-# Disable restores the built-in omarchy.indicators cluster.
 if command -v omarchy-plugin-disable >/dev/null 2>&1; then
   omarchy plugin disable "$PLUGIN_ID" || true
 fi
@@ -24,4 +23,4 @@ fi
 
 systemctl --user daemon-reload 2>/dev/null || true
 
-echo "Removed $PLUGIN_ID and restored the built-in Indicators cluster."
+echo "Removed $PLUGIN_ID."

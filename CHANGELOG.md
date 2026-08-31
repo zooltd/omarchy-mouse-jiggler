@@ -1,10 +1,14 @@
 # Changelog
 
+## 1.0.2 — 2026-08-31
+
+- Stop cloning the built-in Indicators widget. The plugin is a normal bar
+  icon again and no longer ships copies of Stay Awake, Night Light, or DND.
+
 ## 1.0.1 — 2026-08-31
 
-- Move the icon into the built-in Indicators group (Stay Awake, Night Light,
-  Silence Notifications). It is no longer a separate far-right bar widget.
-- Enabling the plugin replaces `omarchy.indicators`; disabling restores it.
+- Brief experiment: clone `omarchy.indicators` so the icon could live in that
+  cluster. Reverted in 1.0.2.
 
 ## 1.0.0 — 2026-08-31
 
