@@ -2,34 +2,79 @@
   "schemaVersion": 1,
   "id": "youhan.mouse-jiggler",
   "name": "Mouse jiggler",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Youhan Wu",
   "license": "MIT",
   "homepage": "https://github.com/zooltd/omarchy-mouse-jiggler",
-  "description": "Omarchy menu bar mouse jiggler. Adds a click-to-toggle mouse icon at the right end of the bar so idle lock, screensaver, and apps stay awake.",
+  "description": "Omarchy Indicators icon: a click-to-toggle mouse jiggler in the same menu-bar group as Stay Awake, Night Light, and Silence Notifications.",
   "kinds": [
     "bar-widget"
   ],
   "entryPoints": {
-    "barWidget": "BarWidget.qml"
+    "barWidget": "Indicators.qml"
   },
   "barWidget": {
     "displayName": "Mouse jiggler",
-    "description": "Mouse icon at the right end of the menu bar. Click to toggle a one-pixel pointer nudge.",
+    "description": "Adds a mouse-jiggler icon to the Indicators group (Stay Awake, Night Light, Silence Notifications). Click to toggle.",
     "category": "Status",
-    "allowMultiple": false,
-    "defaultSection": "right",
-    "defaults": {
-      "interval": 25
-    },
+    "allowMultiple": true,
     "schema": [
       {
-        "key": "interval",
-        "type": "number",
-        "label": "Nudge interval (seconds)",
-        "description": "How often to bump the pointer one pixel and put it back. Default 25.",
-        "defaultValue": 25
+        "key": "items",
+        "type": "multiselect",
+        "label": "Indicators",
+        "description": "Choose which indicators this widget instance should show. Leave empty to show all indicators.",
+        "noSelectionText": "All indicators",
+        "placeholderText": "Search indicators...",
+        "emptyText": "No indicators",
+        "options": [
+          {
+            "value": "Dictation",
+            "label": "Dictation",
+            "description": "Voice typing status"
+          },
+          {
+            "value": "ScreenRecording",
+            "label": "Screen recording",
+            "description": "GPU screen recorder status"
+          },
+          {
+            "value": "Reminder",
+            "label": "Reminder",
+            "description": "Queued reminder status"
+          },
+          {
+            "value": "NightLight",
+            "label": "Night light",
+            "description": "Blue-light filter"
+          },
+          {
+            "value": "Dnd",
+            "label": "Do not disturb",
+            "description": "Notification silencing"
+          },
+          {
+            "value": "StayAwake",
+            "label": "Stay awake",
+            "description": "Idle lock and screensaver override"
+          },
+          {
+            "value": "MouseJiggler",
+            "label": "Mouse jiggler",
+            "description": "One-pixel pointer nudge to stay awake"
+          }
+        ]
+      },
+      {
+        "key": "alwaysShow",
+        "type": "boolean",
+        "label": "Always Show",
+        "description": "Show inactive indicators without waiting for hover.",
+        "defaultValue": false
       }
     ]
+  },
+  "omarchy": {
+    "clonedFrom": "omarchy.indicators"
   }
 }
