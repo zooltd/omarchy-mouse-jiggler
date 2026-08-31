@@ -1,46 +1,54 @@
-# Omarchy Linux Mouse Jiggler (Menu Bar Icon)
+# Mouse Jiggler
 
-A **mouse jiggler for [Omarchy Linux](https://omarchy.org)** — Hyprland / Wayland —
-that puts a **mouse icon in the menu bar**. Click it to enable or disable.
+A menu-bar mouse jiggler for [Omarchy](https://omarchy.org) (Hyprland / Wayland).
+Click the mouse icon to enable or disable.
 
-After install, a mouse icon appears on the Omarchy menu bar. Click it: the
-pointer nudges one pixel and snaps back, so idle lock, screensaver, and apps
-that watch the mouse stay awake. The cursor does not drift off the screen.
+After install, a mouse icon appears on the menu bar. Click it: the pointer
+nudges one pixel and snaps back, so idle lock, screensaver, and apps that
+watch the mouse stay awake. The cursor does not drift off the screen.
 
-Stay Awake only blocks Hyprland idle. This is the Linux menu-bar caffeine /
-mouse-jiggler for everything else: Zoom, Google Meet, remote desktops, and
-websites that go idle when the mouse stops.
+Stay Awake only blocks Hyprland idle. This is for everything else: Zoom,
+Google Meet, remote desktops, and websites that go idle when the mouse stops.
 
-This is a normal third-party bar widget. It does **not** replace Omarchy's
-Indicators group (Stay Awake, Night Light, Silence Notifications). Those stay
-built-in. The jiggler is its own icon; move it anywhere with `omarchy bar move`.
+The bar icon is an Omarchy plugin. The optional CLI loop only needs `hyprctl`,
+so it can run on other Hyprland setups.
 
 ## Menu bar icon
 
 Once the plugin is enabled you get:
 
-- A **mouse icon in the Omarchy menu bar** (the top bar)
+- A **mouse icon in the menu bar**
 - **Click to toggle** mouse jiggle on or off
 - Dim icon = off, full brightness = on
 - Tooltip: "Start mouse jiggler" / "Stop mouse jiggler"
 
-If the icon is missing, the plugin is installed but not on the bar. Run
-`omarchy plugin enable youhan.mouse-jiggler`.
+If the icon is missing, run `omarchy plugin enable youhan.mouse-jiggler`.
+
+This is its own widget. It does not join Omarchy's Indicators group (Stay
+Awake, Night Light, Silence Notifications).
 
 ## Install
-
-On Omarchy Linux:
 
 ```bash
 omarchy plugin add https://github.com/zooltd/omarchy-mouse-jiggler.git --enable
 ```
 
-That is the whole install. A mouse icon appears on the menu bar. The widget
-jiggles on its own while it is on. To park it next to the Indicators cluster:
+A mouse icon appears on the menu bar.
+
+To park it on the **right of the Indicators group** (center of the bar, first
+slot after Indicators — the same place as `--index 1`):
 
 ```bash
 omarchy bar move youhan.mouse-jiggler --after omarchy.indicators
 ```
+
+Same slot on a default bar:
+
+```bash
+omarchy bar move youhan.mouse-jiggler --section center --index 1
+```
+
+Stay Awake is not a bar widget, so there is no `--after StayAwake`.
 
 Optional, if you also want the `omarchy-mouse-jiggler` CLI on your PATH:
 
@@ -60,8 +68,7 @@ omarchy-mouse-jiggler status
 ```
 
 Nudge interval is 25 seconds by default (bar widget settings, or
-`MOUSE_JIGGLER_INTERVAL` for the CLI). Shorter than Omarchy's 150s screensaver
-so idle never wins.
+`MOUSE_JIGGLER_INTERVAL` for the CLI).
 
 The optional user systemd unit is only if you want the loop **without** the
 menu bar widget:
@@ -78,16 +85,13 @@ nudge.
 `hyprctl cursorpos` reads the current location, `movecursor` steps one pixel
 right, then the original coordinates are restored 80 ms later. Hyprland treats
 that as pointer activity, which resets idle and is visible to apps that watch
-the mouse. It is a mouse jiggler, not a warp-to-corner hack, so the pointer
-stays where you left it.
+the mouse.
 
 State is a file at `~/.local/state/omarchy/indicators/mouse-jiggler`. Presence
 means on. Removing it turns the jiggler off. The menu bar widget does not need
 a daemon.
 
-Works on Omarchy Linux (Hyprland + `omarchy-bar`). The plugin lives in
-`~/.config/omarchy/plugins`, which is the supported place for third-party
-shell plugins.
+The bar plugin lives in `~/.config/omarchy/plugins`.
 
 ## Uninstall
 
@@ -106,7 +110,7 @@ That also removes the CLI, the user unit, and the state file.
 ## Layout
 
 ```
-manifest.json     Omarchy plugin manifest (id: youhan.mouse-jiggler)
+manifest.json     Plugin manifest (id: youhan.mouse-jiggler)
 BarWidget.qml     Menu bar icon, click-to-toggle, 1px nudge timer
 bin/              Optional CLI
 systemd/          Optional user unit for running without the bar
