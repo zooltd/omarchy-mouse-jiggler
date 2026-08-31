@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "youhan.mouse-jiggler",
+  "name": "Mouse jiggler",
+  "version": "1.0.0",
+  "author": "Youhan Wu",
+  "license": "MIT",
+  "homepage": "https://github.com/zooltd/omarchy-mouse-jiggler",
+  "description": "Bar toggle that nudges the pointer so idle lock, screensaver, and mouse-watching apps stay awake.",
+  "kinds": ["bar-widget"],
+  "entryPoints": { "barWidget": "BarWidget.qml" },
+  "barWidget": {
+    "displayName": "Mouse jiggler",
+    "description": "Nudge the pointer so idle timers and apps stay awake",
+    "category": "Status",
+    "allowMultiple": false,
+    "defaultSection": "center",
+    "defaults": { "interval": 25 },
+    "schema": [
+      {
+        "key": "interval",
+        "type": "number",
+        "label": "Nudge interval (seconds)",
+        "description": "How often to bump the pointer one pixel and put it back. Default 25.",
+        "defaultValue": 25
+      }
+    ]
+  }
+}

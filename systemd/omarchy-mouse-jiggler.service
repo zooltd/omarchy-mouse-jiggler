@@ -1,0 +1,14 @@
+[Unit]
+Description=Omarchy mouse jiggler
+Documentation=https://github.com/zooltd/omarchy-mouse-jiggler
+After=graphical-session.target
+PartOf=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/omarchy-mouse-jiggler run
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=default.target
