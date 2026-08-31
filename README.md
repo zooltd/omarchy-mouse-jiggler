@@ -24,9 +24,6 @@ Once the plugin is enabled you get:
 
 If the icon is missing, run `omarchy plugin enable youhan.mouse-jiggler`.
 
-This is its own widget. It does not join Omarchy's Indicators group (Stay
-Awake, Night Light, Silence Notifications).
-
 ## Install
 
 ```bash
@@ -47,8 +44,6 @@ Same slot on a default bar:
 ```bash
 omarchy bar move youhan.mouse-jiggler --section center --index 1
 ```
-
-Stay Awake is not a bar widget, so there is no `--after StayAwake`.
 
 Optional, if you also want the `omarchy-mouse-jiggler` CLI on your PATH:
 
