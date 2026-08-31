@@ -30,12 +30,13 @@ if command -v omarchy-shell >/dev/null 2>&1; then
 fi
 
 if command -v omarchy-plugin-enable >/dev/null 2>&1; then
-  omarchy plugin enable "$PLUGIN_ID" --section center || true
+  omarchy plugin enable "$PLUGIN_ID" --section right || true
 fi
 
 if command -v omarchy-bar >/dev/null 2>&1; then
-  omarchy bar move "$PLUGIN_ID" --section center --index 1 || true
+  omarchy bar move "$PLUGIN_ID" --section right --after omarchy.power || \
+    omarchy bar move "$PLUGIN_ID" --section right || true
 fi
 
-echo "Installed $PLUGIN_ID next to Stay Awake."
+echo "Installed $PLUGIN_ID at the right end of the menu bar."
 echo "Click the mouse icon, or run: omarchy-mouse-jiggler toggle"

@@ -3,10 +3,10 @@
 A **mouse jiggler for [Omarchy Linux](https://omarchy.org)** — Hyprland / Wayland —
 that puts a **mouse icon in the menu bar**. Click it to enable or disable.
 
-After install, the icon shows up in the Omarchy menu bar next to the Stay Awake
-icon. Click it: the pointer nudges one pixel and snaps back, so idle lock,
-screensaver, and apps that watch the mouse stay awake. The cursor does not
-drift off the screen.
+After install, a mouse icon appears at the **right end of the Omarchy menu bar**.
+Click it: the pointer nudges one pixel and snaps back, so idle lock, screensaver,
+and apps that watch the mouse stay awake. The cursor does not drift off the
+screen.
 
 Stay Awake only blocks Hyprland idle. This is the Linux menu-bar caffeine /
 mouse-jiggler for everything else: Zoom, Google Meet, remote desktops, and
@@ -16,7 +16,7 @@ websites that go idle when the mouse stops.
 
 Once the plugin is enabled you get:
 
-- A **mouse icon in the Omarchy menu bar** (the top bar), beside Stay Awake
+- A **mouse icon at the right end of the Omarchy menu bar** (the top bar)
 - **Click to toggle** mouse jiggle on or off
 - Dim icon = off, full brightness = on
 - Tooltip: "Start mouse jiggler" / "Stop mouse jiggler"
@@ -30,11 +30,11 @@ On Omarchy Linux:
 
 ```bash
 omarchy plugin add https://github.com/zooltd/omarchy-mouse-jiggler.git --enable
-omarchy bar move youhan.mouse-jiggler --section center --index 1
+omarchy bar move youhan.mouse-jiggler --section right --after omarchy.power
 ```
 
-That is the whole install. A mouse icon appears in the menu bar. The widget
-jiggles on its own while it is on.
+That is the whole install. A mouse icon appears at the rightmost spot on the
+menu bar (after Power). The widget jiggles on its own while it is on.
 
 Optional, if you also want the `omarchy-mouse-jiggler` CLI on your PATH:
 
@@ -45,7 +45,7 @@ cd omarchy-mouse-jiggler
 ```
 
 `install.sh` copies the plugin, puts the CLI in `~/.local/bin`, and places the
-menu bar icon next to Stay Awake.
+menu bar icon at the right end of the bar.
 
 ## Use
 
@@ -108,7 +108,7 @@ manifest.json     Omarchy plugin manifest (id: youhan.mouse-jiggler)
 BarWidget.qml     Menu bar icon, click-to-toggle, 1px nudge timer
 bin/              Optional CLI
 systemd/          Optional user unit for running without the bar
-install.sh        Local install + place icon next to Stay Awake
+install.sh        Local install + place icon at the right end of the bar
 uninstall.sh      Clean removal
 ```
 
