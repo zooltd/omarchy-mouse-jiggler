@@ -21,16 +21,20 @@ if command -v omarchy-plugin-validate >/dev/null 2>&1; then
   omarchy plugin validate "$PLUGIN_DIR"
 fi
 
-if command -v omarchy-shell >/dev/null 2>&1; then
-  omarchy-shell -q shell rescanPlugins || true
-fi
-
 if command -v omarchy-plugin-enable >/dev/null 2>&1; then
   omarchy plugin enable "$PLUGIN_ID" --section center || true
 fi
 
 if command -v omarchy-bar >/dev/null 2>&1; then
   omarchy bar move "$PLUGIN_ID" --after omarchy.indicators || true
+fi
+
+# rescanPlugins does not reload already-running QML. Restart the shell so
+# the bar actually picks up this install.
+if command -v omarchy >/dev/null 2>&1; then
+  omarchy restart shell || true
+elif command -v omarchy-shell >/dev/null 2>&1; then
+  omarchy-shell -q shell rescanPlugins || true
 fi
 
 echo "Installed $PLUGIN_ID as its own menu bar icon."

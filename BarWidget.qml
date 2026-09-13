@@ -14,6 +14,7 @@ BarWidget {
   readonly property int intervalSeconds: Math.max(5, Number(setting("interval", 25)) || 25)
 
   property bool enabled: false
+  property bool healthy: true
 
   implicitWidth: button.implicitWidth
   implicitHeight: button.implicitHeight
@@ -63,7 +64,8 @@ BarWidget {
 
   Process {
     id: nudgeProc
-    command: ["bash", "-lc", "raw=$(hyprctl cursorpos 2>/dev/null || true); raw=${raw// /}; x=${raw%%,*}; y=${raw##*,}; [[ $x =~ ^[0-9]+$ && $y =~ ^[0-9]+$ ]] || exit 0; hyprctl dispatch \"hl.dsp.cursor.move({ x = $((x + 1)), y = $y })\" >/dev/null 2>&1 || true; sleep 0.08; hyprctl dispatch \"hl.dsp.cursor.move({ x = $x, y = $y })\" >/dev/null 2>&1 || true"]
+    command: ["bash", "-lc", "raw=$(hyprctl cursorpos 2>/dev/null || true); raw=${raw// /}; x=${raw%%,*}; y=${raw##*,}; [[ $x =~ ^[0-9]+$ && $y =~ ^[0-9]+$ ]] || exit 0; move() { hyprctl dispatch \"hl.dsp.cursor.move({ x = $1, y = $2 })\" >/dev/null 2>&1 || hyprctl dispatch movecursor \"$1\" \"$2\" >/dev/null 2>&1; }; move $((x + 1)) \"$y\" || exit 1; sleep 0.08; move \"$x\" \"$y\" || true"]
+    onExited: function(exitCode) { root.healthy = exitCode === 0 }
   }
 
   FileView {
@@ -96,10 +98,12 @@ BarWidget {
     text: "󰍽"
     slotSize: Style.bar.statusSlot
     fontSize: Style.font.caption
-    active: root.enabled
-    dimmed: !root.enabled
+    active: root.enabled && root.healthy
+    dimmed: !root.enabled || !root.healthy
     useActiveColor: false
-    tooltipText: root.enabled ? "Stop mouse jiggler" : "Start mouse jiggler"
+    tooltipText: root.enabled && !root.healthy
+      ? "Jiggle failed — Hyprland rejected the cursor move"
+      : (root.enabled ? "Stop mouse jiggler" : "Start mouse jiggler")
     onPressed: root.toggle()
   }
 }

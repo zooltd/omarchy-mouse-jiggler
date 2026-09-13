@@ -7,7 +7,7 @@ STATE_FILE="$STATE_DIR/mouse-jiggler"
 INTERVAL="${MOUSE_JIGGLER_INTERVAL:-25}"
 
 usage() {
-  echo "Usage: omarchy-mouse-jiggler [toggle|on|off|status|run]" >&2
+  echo "Usage: omarchy-mouse-jiggler [toggle|on|off|status|nudge|run]" >&2
   exit 1
 }
 
@@ -50,14 +50,25 @@ read_cursor() {
   return 1
 }
 
+move_cursor() {
+  local nx="$1" ny="$2"
+  if hyprctl dispatch "hl.dsp.cursor.move({ x = $nx, y = $ny })" >/dev/null 2>&1; then
+    return 0
+  fi
+  hyprctl dispatch movecursor "$nx" "$ny" >/dev/null 2>&1
+}
+
 nudge_pointer() {
   local x y
   if ! read -r x y < <(read_cursor); then
     return 0
   fi
-  hyprctl dispatch "hl.dsp.cursor.move({ x = $((x + 1)), y = $y })" >/dev/null 2>&1 || true
+  if ! move_cursor "$((x + 1))" "$y"; then
+    echo "omarchy-mouse-jiggler: hyprctl could not move the cursor" >&2
+    return 1
+  fi
   sleep 0.08
-  hyprctl dispatch "hl.dsp.cursor.move({ x = $x, y = $y })" >/dev/null 2>&1 || true
+  move_cursor "$x" "$y" || true
 }
 
 run_loop() {
@@ -65,7 +76,7 @@ run_loop() {
   touch "$STATE_FILE"
   notify_shell
   while [[ -f $STATE_FILE ]]; do
-    nudge_pointer
+    nudge_pointer || true
     sleep "$INTERVAL"
   done
 }
@@ -88,6 +99,9 @@ case "${1:-toggle}" in
     ;;
   status|--status)
     print_status
+    ;;
+  nudge)
+    nudge_pointer
     ;;
   run)
     run_loop

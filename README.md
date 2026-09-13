@@ -78,9 +78,14 @@ nudge.
 ## How it works
 
 `hyprctl cursorpos` reads the current location, then
-`hl.dsp.cursor.move` steps one pixel right and the original coordinates are
-restored 80 ms later. Hyprland treats that as pointer activity, which resets
-idle and is visible to apps that watch the mouse.
+`hl.dsp.cursor.move` (or the older `movecursor` dispatcher) steps one pixel
+right and the original coordinates are restored 80 ms later. Hyprland treats
+that as pointer activity, which resets idle and is visible to apps that watch
+the mouse. If both calls fail, the bar icon dims and the tooltip reports it
+instead of staying "on" with a dead nudge.
+
+`./install.sh` restarts the Omarchy shell so the bar reloads this plugin's
+QML. Copying files alone is not enough.
 
 State is a file at `~/.local/state/omarchy/indicators/mouse-jiggler`. Presence
 means on. Removing it turns the jiggler off. The menu bar widget does not need
