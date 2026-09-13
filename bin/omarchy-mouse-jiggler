@@ -55,9 +55,9 @@ nudge_pointer() {
   if ! read -r x y < <(read_cursor); then
     return 0
   fi
-  hyprctl dispatch movecursor "$((x + 1))" "$y" >/dev/null 2>&1 || true
+  hyprctl dispatch "hl.dsp.cursor.move({ x = $((x + 1)), y = $y })" >/dev/null 2>&1 || true
   sleep 0.08
-  hyprctl dispatch movecursor "$x" "$y" >/dev/null 2>&1 || true
+  hyprctl dispatch "hl.dsp.cursor.move({ x = $x, y = $y })" >/dev/null 2>&1 || true
 }
 
 run_loop() {

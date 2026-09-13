@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.3 — 2026-09-13
+
+- Use Hyprland 0.56 `hl.dsp.cursor.move` instead of the removed `movecursor`
+  dispatcher so the one-pixel nudge actually moves the pointer.
+
 ## 1.0.2 — 2026-08-31
 
 - Stop cloning the built-in Indicators widget. The plugin is a normal bar

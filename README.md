@@ -77,10 +77,10 @@ nudge.
 
 ## How it works
 
-`hyprctl cursorpos` reads the current location, `movecursor` steps one pixel
-right, then the original coordinates are restored 80 ms later. Hyprland treats
-that as pointer activity, which resets idle and is visible to apps that watch
-the mouse.
+`hyprctl cursorpos` reads the current location, then
+`hl.dsp.cursor.move` steps one pixel right and the original coordinates are
+restored 80 ms later. Hyprland treats that as pointer activity, which resets
+idle and is visible to apps that watch the mouse.
 
 State is a file at `~/.local/state/omarchy/indicators/mouse-jiggler`. Presence
 means on. Removing it turns the jiggler off. The menu bar widget does not need
