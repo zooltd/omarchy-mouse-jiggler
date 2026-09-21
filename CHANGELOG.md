@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.6 — 2026-09-20
+
+- Ship as a plugin-only package for cleaner marketplace review: remove the
+  optional CLI, user systemd unit, and `install.sh` / `uninstall.sh`.
+- Install and remove only through `omarchy plugin add` / `omarchy plugin remove`.
+
+
 ## 1.0.5 — 2026-09-20
 
 - Align packaging with the Omarchy Quattro plugin development guide: README
@@ -7,7 +14,6 @@
   button, and clearer `hyprctl` dependency docs.
 - Keep click-to-toggle behavior (no details panel) and plugin id
   `youhan.mouse-jiggler`.
-
 
 ## 1.0.4 — 2026-09-13
 
