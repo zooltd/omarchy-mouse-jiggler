@@ -91,6 +91,7 @@ BarWidget {
     onTriggered: root.nudge()
   }
 
+  // Icon status slot: BarIconButton matches first-party indicator-style widgets.
   BarIconButton {
     id: button
     anchors.fill: parent
@@ -104,6 +105,9 @@ BarWidget {
     tooltipText: root.enabled && !root.healthy
       ? "Jiggle failed — Hyprland rejected the cursor move"
       : (root.enabled ? "Stop mouse jiggler" : "Start mouse jiggler")
-    onPressed: root.toggle()
+    onPressed: function(buttonCode) {
+      if (buttonCode === Qt.LeftButton)
+        root.toggle()
+    }
   }
 }

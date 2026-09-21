@@ -2,11 +2,11 @@
   "schemaVersion": 1,
   "id": "youhan.mouse-jiggler",
   "name": "Mouse jiggler",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "author": "Youhan Wu",
   "license": "MIT",
   "homepage": "https://github.com/zooltd/omarchy-mouse-jiggler",
-  "description": "Omarchy menu bar mouse jiggler. Adds a click-to-toggle mouse icon so idle lock, screensaver, and apps stay awake.",
+  "description": "Click-to-toggle Omarchy bar mouse jiggler. Nudges the Hyprland pointer so idle lock, screensaver, and apps stay awake.",
   "kinds": [
     "bar-widget"
   ],

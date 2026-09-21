@@ -17,7 +17,10 @@ systemctl --user disable omarchy-mouse-jiggler.service 2>/dev/null || true
 rm -rf "$PLUGIN_DIR"
 rm -f "$BIN" "$UNIT" "$STATE"
 
-if command -v omarchy-shell >/dev/null 2>&1; then
+# Restart the shell so the bar drops the removed QML instead of keeping it loaded.
+if command -v omarchy >/dev/null 2>&1; then
+  omarchy restart shell || true
+elif command -v omarchy-shell >/dev/null 2>&1; then
   omarchy-shell -q shell rescanPlugins || true
 fi
 
