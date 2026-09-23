@@ -1,12 +1,8 @@
 # Mouse Jiggler
 
 A click-to-toggle mouse icon for the [Omarchy](https://omarchy.org) Quattro bar.
-It nudges the Hyprland pointer one pixel and puts it back so idle lock,
-screensaver, Zoom, Meet, remote desktops, and other mouse-watching apps stay
-awake.
-
-Stay Awake only blocks Hyprland idle. This plugin is for everything else that
-watches the pointer.
+It nudges the Hyprland pointer one pixel and puts it back so Zoom, Meet, remote
+desktops, websites, and other apps that watch mouse motion stay awake.
 
 **Requires:** Hyprland with `hyprctl` on `PATH`.
 
@@ -40,6 +36,20 @@ omarchy bar move youhan.mouse-jiggler --section center --index 1
 Nudge interval defaults to 25 seconds. Change it in the bar widget settings
 (`interval`).
 
+## Why the screensaver can still appear
+
+Omarchy’s screensaver and lock come from the built-in **Stay Awake / idle**
+service (`omarchy.idle`). That service uses Quickshell’s `IdleMonitor`. Stay
+Awake turns that monitor off so the screensaver does not start.
+
+This plugin does something different. It only moves the pointer with `hyprctl`.
+That can wake apps that watch the mouse. It does **not** reset Omarchy’s
+`IdleMonitor`, so the screensaver can still fire while the mouse icon is on.
+
+Use **Stay Awake** for the Omarchy screensaver or lock. Use **Mouse jiggler**
+for Zoom, Meet, remotes, and other mouse-watching apps. You can run both at
+once.
+
 ## Remove
 
 ```sh
@@ -59,6 +69,7 @@ widget does not need a daemon.
 ```
 manifest.json     Plugin manifest (id: youhan.mouse-jiggler)
 BarWidget.qml     Menu bar icon, click-to-toggle, 1px nudge timer
+preview.png       Marketplace preview
 ```
 
 ## License

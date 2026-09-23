@@ -1,11 +1,16 @@
 # Changelog
 
+## Docs — 2026-09-22
+
+- Clarify that Stay Awake blocks Omarchy’s screensaver via `IdleMonitor`, while
+  Mouse jiggler only nudges the pointer for mouse-watching apps.
+
+
 ## 1.0.6 — 2026-09-20
 
 - Ship as a plugin-only package for cleaner marketplace review: remove the
   optional CLI, user systemd unit, and `install.sh` / `uninstall.sh`.
 - Install and remove only through `omarchy plugin add` / `omarchy plugin remove`.
-
 
 ## 1.0.5 — 2026-09-20
 
