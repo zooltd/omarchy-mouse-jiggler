@@ -1,5 +1,7 @@
 # Mouse Jiggler
 
+![Mouse jiggler icon on the Omarchy bar with its tooltip](preview.png)
+
 A click-to-toggle mouse icon for the [Omarchy](https://omarchy.org) Quattro bar.
 It nudges the Hyprland pointer one pixel and puts it back so Zoom, Meet, remote
 desktops, websites, and other apps that watch mouse motion stay awake.
